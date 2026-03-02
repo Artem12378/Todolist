@@ -1,17 +1,19 @@
+import {TaskType} from "./Todolist";
 
- type TitleBut = {
+type TitleBut = {
     name:string
+    onClick?:() => void
 }
 
 
-export const ButtonName = (props:TitleBut) => {
+export const Button = (props:TitleBut) => {
 
-    const TitleBut = props
 
     return (
-        <div>
-            <button>{TitleBut.name}</button>
-        </div>
+
+            <button onClick={props.onClick} >{props.name}</button>
+
+
     )
 
 }
