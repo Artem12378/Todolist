@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { TaskType, Todolist } from './Todolist';
 import {getFilteredTasks} from "./util";
+import {v1} from "uuid";
 
 
 export type FilterButtonProps = 'all' | 'active' | 'completed'| 'delete';
@@ -11,9 +12,9 @@ export type FilterButtonProps = 'all' | 'active' | 'completed'| 'delete';
 function App() {
 
   const initialState: TaskType[] = [
-  {id:1, title:'HTML&CSS' , isDone:true },
-  {id:2, title:'JS' , isDone:false },
-  {id:3, title:'REACT' , isDone:true }
+  {id:v1(), title:'HTML&CSS' , isDone:true },
+  {id:v1(), title:'JS' , isDone:false },
+  {id:v1(), title:'REACT' , isDone:true }
   ]
 
 
@@ -31,6 +32,16 @@ function App() {
     setTasks(nextTasks)
   }
 
+  const CreateTask =(props:string) =>{
+    const newTask = {
+      id: v1(),
+      title: props,
+      isDone:false
+    }
+    const newState = [...tasks, newTask]
+    setTasks(newState)
+  }
+
   const TasksForTodolists = getFilteredTasks(tasks,Filter);
 
   const ChangeTodolistFilter = (Filter: FilterButtonProps) => {
@@ -43,6 +54,7 @@ function App() {
                 tasks={TasksForTodolists}
                 deleteTask={deleteTask}
                 ChangeTodolistFilter={ChangeTodolistFilter}
+                CreateTask={CreateTask}
       />
 
     </div>

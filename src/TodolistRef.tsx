@@ -1,6 +1,6 @@
 import {Button} from "./button"
 import {FilterButtonProps} from "./App";
-import {ChangeEvent, useRef, useState} from "react";
+import {useRef} from "react";
 
 
 
@@ -23,23 +23,10 @@ export type TaskType = {
 }
 
 export const Todolist = (props: PropsTitle) => {
-    const [taskInput, setTaskInput] = useState('')
+
     const {title, tasks, deleteTask} = props
 
-
-
-    const onClickCreateTaskHandler = () => {
-        props.CreateTask(taskInput)
-        setTaskInput('')
-    }
-    const onChangeSetTitleHandler = (e: ChangeEvent<HTMLInputElement>) => setTaskInput(e.currentTarget.value)
-    const onKeyDownCreateTaskHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if(e.key === 'Enter') {
-            onClickCreateTaskHandler()
-        }
-    }
-
-
+    const taskInputRef = useRef<HTMLInputElement>(null)
 
     const tasksList = props.tasks.length === 0 
     ? <span>Your is empty</span>
@@ -54,17 +41,15 @@ export const Todolist = (props: PropsTitle) => {
         <div>
             <div>
                 <h3>{props.title}</h3>
-                <input value={taskInput}
-                       onKeyDown={onKeyDownCreateTaskHandler}
-                        onChange={onChangeSetTitleHandler}/>
-                <Button name={'+'}
-                        disabled={taskInput.length <3 || taskInput.length > 10}
-                        onClick={onClickCreateTaskHandler}
-                />
-                {!!taskInput.length && taskInput.length <3 && <div>title must be more then 3 charaters</div>}
-                {taskInput.length >= 3 && taskInput.length <= 10 && <div> title must be less then 10 charaters </div>}
-                {taskInput.length > 10 && <div style={{color:'red'}} > title must be less then 10 charaters </div>}
+                <input ref={taskInputRef}
 
+                />
+                <Button name={'+'} onClick={()=> {
+                    if(taskInputRef.current ){
+                        props.CreateTask(taskInputRef.current.value)
+                        taskInputRef.current.value=''
+                    }
+                }    } />
             </div>
             <ul>
 
