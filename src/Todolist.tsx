@@ -50,6 +50,7 @@ export const Todolist = (props: PropsTitle) => {
                 <Button name='all' onClick={()=>(props.ChangeTodolistFilter('all'))}/>
                 <Button name='active' onClick={()=>(props.ChangeTodolistFilter('active'))}/>
                 <Button name='completed' onClick={()=>(props.ChangeTodolistFilter('completed'))}/>
+                <div><Button name='Delete all tasks' onClick={()=>(props.ChangeTodolistFilter('delete'))}/></div>
             </div>
         </div>
     )

@@ -5,7 +5,7 @@ import { TaskType, Todolist } from './Todolist';
 import {getFilteredTasks} from "./util";
 
 
-export type FilterButtonProps = 'all' | 'active' | 'completed';
+export type FilterButtonProps = 'all' | 'active' | 'completed'| 'delete';
 
 
 function App() {

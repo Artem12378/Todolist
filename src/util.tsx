@@ -8,5 +8,7 @@ export const getFilteredTasks = (tasks:TaskType[], Filter: FilterButtonProps) =>
         ? tasks.filter(f => !f.isDone)
         : Filter === 'completed'
             ? tasks.filter(f => f.isDone)
-            :  tasks
+        : Filter ==='delete'
+            ? tasks.filter(f => f.title === 'delete')
+        : tasks
 }
