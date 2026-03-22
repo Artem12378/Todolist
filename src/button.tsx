@@ -4,6 +4,7 @@ type TitleBut = {
     name:string
     onClick?:() => void
     disabled?:boolean
+    className?:string
 }
 
 

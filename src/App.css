@@ -36,3 +36,36 @@
     transform: rotate(360deg);
   }
 }
+
+
+.task-done {
+  font-style: italic;
+  text-decoration: line-through;
+  opacity: 0.5;
+
+}
+
+.task {
+  font-weight: bold;
+}
+
+.btn-filter-active {
+  color: #61dafb;
+  background-color: chartreuse;
+ font-weight: bold;
+
+}
+
+.btn-filter-active1 {
+  color: #61dafb;
+  background-color: chartreuse;
+  font-weight: bold;
+
+}
+
+.btn-filter-active2 {
+  color: #61dafb;
+  background-color: chartreuse;
+  font-weight: bold;
+
+}
