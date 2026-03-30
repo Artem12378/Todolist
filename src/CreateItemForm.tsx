@@ -1,5 +1,7 @@
 import React, {ChangeEvent, useState} from 'react';
 import {Button} from "./button";
+import {IconButton, TextField} from "@mui/material";
+import CloudUploadRoundedIcon from '@mui/icons-material/CloudUploadRounded';
 
 
 export type CreateItemFormProps = {
@@ -29,15 +31,23 @@ const CreateItemForm = (props: CreateItemFormProps) => {
 
     return (
         <div>
-            <input
+            <TextField
+                size={'small'}
                 value={ItemInput}
                 onKeyDown={onKeyDownCreateItemHandler}
                 onChange={onChangeSetTitleHandler}
+
             />
-            <Button
-                name={'+'}
+            {/*<Button*/}
+            {/*    name={'+'}*/}
+            {/*    onClick={onClickCreateItemHandler}*/}
+            {/*/>*/}
+            <IconButton
                 onClick={onClickCreateItemHandler}
-            />
+            >
+                <CloudUploadRoundedIcon/>
+
+            </IconButton>
             {!!ItemInput.length && ItemInput.length < 3 && (
                 <div>title must be more than 3 characters</div>
             )}

@@ -1,51 +1,34 @@
-import React, {useState} from 'react';
-import {EditableSpan} from "./EditableSpan";
-import {Button} from "./button";
+import React, { useState } from 'react';
+import { EditableSpan } from "./EditableSpan";
+import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
+import { Box, IconButton, SxProps } from "@mui/material";
 
 type Props = {
-    className?: string,
-    title: string,
-    changeTitle: (title: string) => void,
-    deleteItem: () => void,
-}
+    title: string;
+    changeTitle: (title: string) => void;
+    deleteItem: () => void;
+    sx?: SxProps;
+};
 
-const ItemTitle = (props: Props) => {
+const ItemTitle = ({ title, changeTitle, deleteItem, sx }: Props) => {
     const [editMode, setEditMode] = useState(false);
 
     const onEditMode = () => setEditMode(true);
     const offEditMode = () => setEditMode(false);
 
     return (
-        editMode
-            ?
-            <span>
-                <EditableSpan
-                    title={props.title}
-                    classname={props.className}
-                    editMode={editMode}
-                    onEditMode={onEditMode}
-                    offEditMode={offEditMode}
-                    changeTitle={(title: string) =>
-                        props.changeTitle(title)}/>
-
-
-
-            </span>
-            :
-            <span className={props.className}>
-                <EditableSpan
-                    title={props.title}
-                    classname={props.className}
-                    editMode={editMode}
-                    onEditMode={onEditMode}
-                    offEditMode={offEditMode}
-                    changeTitle={(title: string) =>
-                        props.changeTitle(title)}/>
-
-            <Button name="X" onClick={props.deleteItem}/>
-            </span>
-
-
+        <Box sx={sx} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+            <EditableSpan
+                title={title}
+                changeTitle={changeTitle}
+                editMode={editMode}           // теперь поле знает, что редактирование включено
+                onEditMode={onEditMode}
+                offEditMode={offEditMode}
+            />
+            <IconButton size="small" onClick={deleteItem}>
+                <DeleteForeverRoundedIcon fontSize="small" />
+            </IconButton>
+        </Box>
     );
 };
 

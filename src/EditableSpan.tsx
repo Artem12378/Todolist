@@ -1,42 +1,43 @@
-import React, {useState} from 'react';
-import {Button} from "./button";
+import React, { useState } from 'react';
+import { Button } from './button';
 
 type Props = {
     title: string;
     changeTitle: (newTitle: string) => void;
-    classname?: string
-    editMode?: boolean
-    onEditMode: () => void;
-    offEditMode: () => void;
+    className?: string;
+    editMode?: boolean;
+    onEditMode?: () => void;
+    offEditMode?: () => void;
 };
 
-export const EditableSpan = (props: Props) => {
+export const EditableSpan = ({
+                                 title,
+                                 changeTitle,
+                                 className,
+                                 editMode = false,
+                                 onEditMode,
+                                 offEditMode,
+                             }: Props) => {
+    const [currentTitle, setCurrentTitle] = useState(title);
 
-    const [title, setTitle] = useState(props.title);
+    const exitEditMode = () => {
+        offEditMode?.();
+        changeTitle(currentTitle);
+    };
 
-
-    const offEditMode = () => {
-        props.offEditMode();
-        props.changeTitle(title);
-
-    }
-    return (
+    return editMode ? (
         <>
-            {props.editMode ? (
-                <>
-                    <input
-                    autoFocus
-                    onBlur={offEditMode}
-                    value={title}
-                    onChange={(e) => setTitle(e.currentTarget.value)}
-                    />
-                    <Button name="save" onClick={offEditMode}/>
-                </>
-            ) : (
-                <span className={props.classname} onDoubleClick={props.onEditMode}>
-                    {props.title}
-                </span>
-            )}
+            <input
+                autoFocus
+                onBlur={exitEditMode}
+                value={currentTitle}
+                onChange={(e) => setCurrentTitle(e.currentTarget.value)}
+            />
+            <Button name="save" onClick={exitEditMode} />
         </>
+    ) : (
+        <span className={className} onDoubleClick={onEditMode}>
+            {title}
+        </span>
     );
 };
