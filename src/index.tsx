@@ -1,24 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import App from './App';
+import './index.css';
 
 const theme = createTheme();
 
-const root = ReactDOM.createRoot(
-    document.getElementById('root') as HTMLElement
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+    <ThemeProvider theme={theme}>
+        <App />
+    </ThemeProvider>
 );
-
-root.render(
-
-        <ThemeProvider theme={theme}>
-            <App />
-        </ThemeProvider>
-
-);
-
-
-reportWebVitals();

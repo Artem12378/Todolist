@@ -59,9 +59,7 @@ function App() {
         ]
     })
     const [Filter, setFilter] = useState<FilterButtonProps>('all');
-
-
-    const TodolistTitle = 'What to learn'
+    
 
     const deleteTask = (taskId: TaskType['id'], todolistId: TodolistType['id']) => {
         setTasks({...tasks, [todolistId]: tasks[todolistId].filter(f => f.id !== taskId)})
